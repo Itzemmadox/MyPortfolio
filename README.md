@@ -78,7 +78,7 @@ Dark mode is automatically saved to localStorage and can be toggled via the navi
 
 ## 🔗 GitHub Integration
 
-The Projects section can fetch and display specific GitHub repositories using a Personal Access Token (PAT).
+The Projects section can automatically fetch and display your starred GitHub repositories, or you can manually select specific repositories.
 
 ### Setup Instructions:
 
@@ -93,7 +93,9 @@ The Projects section can fetch and display specific GitHub repositories using a 
 2. **Configure GitHub Integration:**
    - Open `src/config/github.js`
    - Paste your Personal Access Token: `personalAccessToken: 'ghp_your_token_here'`
-   - Add repositories to display in `selectedRepos` array:
+   - Set your GitHub username: `username: 'your-github-username'`
+   - Enable starred repos: `fetchStarredRepos: true` (to automatically show all starred repos)
+   - Or manually select repos in `selectedRepos` array:
      ```javascript
      selectedRepos: [
        'facebook/react',
@@ -122,12 +124,16 @@ The Projects section can fetch and display specific GitHub repositories using a 
 ### Configuration Options:
 
 - `personalAccessToken`: Your GitHub PAT (required for authentication)
-- `selectedRepos`: Array of repositories to display (format: `"owner/repo-name"`)
-- `featuredRepos`: Array of repos to mark as featured (must be in `selectedRepos`)
+- `username`: Your GitHub username (required if `fetchStarredRepos` is enabled)
+- `fetchStarredRepos`: Automatically fetch and display starred repositories (default: true)
+- `maxStarredRepos`: Maximum number of starred repos to fetch (default: 30)
+- `selectedRepos`: Array of repositories to display manually (format: `"owner/repo-name"`)
+- `featuredRepos`: Array of repos to mark as featured (works for both starred and selected)
 - `showGitHubReposFirst`: Show GitHub repos before manual projects (default: true)
 - `enabled`: Enable/disable GitHub integration (default: true)
 
 ### Features:
+- ✅ Automatic fetching of starred repositories
 - ✅ Manual selection of specific repositories
 - ✅ Personal Access Token authentication (higher rate limits)
 - ✅ Displays repository description, tech stack (topics), stars, forks, and language
@@ -135,6 +141,7 @@ The Projects section can fetch and display specific GitHub repositories using a 
 - ✅ Links to GitHub repository and live demo (if available)
 - ✅ Beautiful gradient backgrounds for each repo
 - ✅ Loading and error states with helpful messages
+- ✅ Automatic retry logic for network errors
 
 ### Security Note:
 ⚠️ **Never commit your Personal Access Token to version control!**
@@ -144,4 +151,3 @@ The Projects section can fetch and display specific GitHub repositories using a 
 ## 📄 License
 
 © 2024 OLUWASEUN EMMANUEL KEHINDE. All rights reserved.
-
